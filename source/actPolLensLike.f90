@@ -324,8 +324,8 @@ module actPolLensLike
             ! stop
             
             corrN0 = N0corr*binnedFidClkk
-            perN0 = maxval(abs((100.*((corrN0))/(binnedTheoryClkk))))
-            write (*,*) "N0 % correction ", perN0
+            !perN0 = maxval(abs((100.*((corrN0))/(binnedTheoryClkk))))
+            !write (*,*) "N0 % correction ", perN0
          end if
       end if
       
@@ -336,8 +336,8 @@ module actPolLensLike
       if (this%do_n1  .and. this%do_likemod) then
 
          corrN1 = this%N1Template * (((sum(tElls(n1lmin:n1lmax)*nCl%clkk(n1lmin:n1lmax)))/(sum(tElls(n1lmin:n1lmax)*this%fCl%clkk(n1lmin:n1lmax))))-1.)
-         perN1 = maxval(abs(100.*corrN1/binnedTheoryClkk))
-         write (*,*) "N1 % correction ", perN1
+         !perN1 = maxval(abs(100.*corrN1/binnedTheoryClkk))
+         !write (*,*) "N1 % correction ", perN1
       end if
       
       binnedMVTheoryClkk = binnedTheoryClkk + corrN0 + corrN1

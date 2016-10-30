@@ -1,0 +1,37 @@
+# these are the commands to be run.  if you only have a 
+# single command, you can use a single line such as 
+# command: ./script
+
+command: |
+    source ~/.bashrc
+    source ~/.bash_profile
+    cd /astro/u/msyriac/software/CosmoMC-June2016
+    OMP_NUM_THREADS=%threads% 
+    mpirun -hostfile %hostfile% ./cosmomc ININAME  > /astro/astronfs01/workarea/msyriac/chains/log/CHAINNAME.log
+
+# show this name in job listings instead of the command
+job_name: THISJOBNAME
+
+# this is the type of node/host selection. bynode means select entire
+# nodes.
+mode: bycore
+
+# Since the mode is bynode, this means 5 full nodes
+N: 48
+
+# Select from this group(s)
+group: [new,new2]
+
+
+# require at least this many cores
+#min_cores: 6
+
+# used by MPI jobs
+hostfile: auto
+
+# If we have 5 full nodes of 12 cores each,
+# there is 60 cores in total. Threads:4 ensures each
+# host is listed 3 times. So the command above will
+# run 15 MPI nodes of 4 threads each
+
+threads: 6
