@@ -7,6 +7,7 @@
     contains
 
     subroutine SetDataLikelihoods(Ini)
+    use actPolLensLike
     use HST
     use snovae
     use CMBLikelihoods
@@ -21,7 +22,7 @@
     CosmoSettings%get_sigma8 = Ini%Read_Logical('get_sigma8',.false.)
 
     call CMBLikelihood_Add(DataLikelihoods, Ini)
-
+    call ACTPolLensingLikelihood_Add(DataLikelihoods, Ini)
     call AbundanceLikelihood_Add(DataLikelihoods, Ini)
 
     call HSTLikelihood_Add(DataLikelihoods, Ini)
