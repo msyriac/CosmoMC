@@ -5,7 +5,7 @@
 command: |
     source ~/.bashrc
     source ~/.bash_profile
-    cd /astro/u/msyriac/software/CosmoMC-June2016
+    cd /astro/astronfs01/workarea/msyriac/bigGits/CosmoMC
     OMP_NUM_THREADS=%threads% 
     mpirun -hostfile %hostfile% ./cosmomc ININAME  > /astro/astronfs01/workarea/msyriac/chains/log/CHAINNAME.log
 
@@ -18,9 +18,12 @@ mode: bycore
 
 # Since the mode is bynode, this means 5 full nodes
 N: 48
+#N: 64
 
 # Select from this group(s)
-group: [new,new2]
+#group: [new,new2,new3]
+#group: [new3]
+group: [new2]
 
 
 # require at least this many cores
@@ -35,3 +38,4 @@ hostfile: auto
 # run 15 MPI nodes of 4 threads each
 
 threads: 6
+#threads: 8
