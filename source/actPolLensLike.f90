@@ -60,6 +60,7 @@ module actPolLensLike
      real(8), dimension(:), allocatable :: N1Template ! N1 correction fiducial
      real(8), dimension(:), allocatable :: fixedn0 ! if fixing N0 correction
 
+     real(8) :: normScale ! multiply estimated bandpowers and sqrt(covariance) by a number for debugging
 
      logical do_likemod ! master switch for corrections
      logical do_n0 ! n0 correction
@@ -99,6 +100,7 @@ module actPolLensLike
          this%ellmax = Ini%Read_Int('lmin_store_all_cmb',3000)
 
          this%fix_n0 = Ini%Read_Logical('fix_n0_fiducial',.false.)
+         this%normScale = Ini%Read_Double('normScale',1.d0)
      
 
          call this%actplens_init(Ini)
@@ -340,7 +342,7 @@ module actPolLensLike
          !write (*,*) "N1 % correction ", perN1
       end if
       
-      binnedMVTheoryClkk = binnedTheoryClkk + corrN0 + corrN1
+      binnedMVTheoryClkk = this%normScale*(binnedTheoryClkk + corrN0 + corrN1)
       
       
 
@@ -369,7 +371,7 @@ module actPolLensLike
       ! This just implements 
       ! -2LnLike = (data - model) * Cinv * (data - model)^T
       diff = binnedMVTheoryClkk-this%estClkk
-      actplens_calcLike = Matrix_QuadForm(this%sigInv,diff) / 2.
+      actplens_calcLike = Matrix_QuadForm(this%sigInv/this%normScale/this%normScale,diff) / 2.
 
 
 
