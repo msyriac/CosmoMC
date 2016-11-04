@@ -342,7 +342,7 @@ module actPolLensLike
          !write (*,*) "N1 % correction ", perN1
       end if
       
-      binnedMVTheoryClkk = this%normScale*(binnedTheoryClkk + corrN0 + corrN1)
+      binnedMVTheoryClkk = (binnedTheoryClkk + corrN0 + corrN1)/CMB%Alens
       
       
 
@@ -370,7 +370,7 @@ module actPolLensLike
 
       ! This just implements 
       ! -2LnLike = (data - model) * Cinv * (data - model)^T
-      diff = binnedMVTheoryClkk-this%estClkk
+      diff = binnedMVTheoryClkk-(this%estClkk*this%normScale)
       actplens_calcLike = Matrix_QuadForm(this%sigInv/this%normScale/this%normScale,diff) / 2.
 
 
