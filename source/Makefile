@@ -83,8 +83,16 @@ PICO ?= $(shell python -c "import pypico; print pypico.get_folder()" 2> /dev/nul
 #Needed for WMAP; set from ~/.bashrc definition or edit here
 cfitsio ?=
 
+#set ACTPOL
+ACTPol ?= /users/msyriac/repos/CosmoMC/actpollite_s2_like
+
+#empty not to compile with CLIK, set from ~/.bashrc
+PLANCKLIKE ?=
+
 #not used in public cosmomc
 NONCLIKLIKE ?=
+highL ?=
+
 
 IFLAG = -I
 INCLUDE =
@@ -264,6 +272,14 @@ $(OUTPUT_DIR)/cliklike_CamSpec.o: $(highL)/libhigh.a
 endif
 
 
+#ACTPol
+ifneq ($(ACTPol),)
+FFLAGS += -DACTPol
+LINKFLAGS += -L$(ACTPol) -lactpol
+INCLUDE += $(IFLAG)$(ACTPol)
+endif
+
+
 ifneq ($(WMAP),)
 $(OUTPUT_DIR)/CMB.o: $(WMAP)/libwmap9.a
 F90FLAGS += $(IFLAG)$(cfitsio)/include $(IFLAG)$(WMAP) -DWMAP
@@ -322,3 +338,6 @@ $(highL)/libhigh.a:
 $(WMAP)/libwmap9.a:
 	cd $(WMAP); make libwmap9.a;
 
+# ACTPol
+$(ACTPol)/libactpol.a:
+	cd $(ACTPol); make libactpol.a;
