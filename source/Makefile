@@ -14,10 +14,12 @@ ifeq "$(ifortErr)" "0"
 
 F90C     = ifort
 #use this if mpif90 is trying to use gfortran: 
-MPIF90C = mpif90 -f90=ifort
+#MPIF90C = mpif90 -f90=ifort
 
-FFLAGS = -mkl -O3 -no-prec-div -fpp
-DEBUGFLAGS = -mkl -g -check all -check noarg_temp_created -traceback -fpp -fpe0
+FFLAGS = -mkl -openmp -O3 -no-prec-div -fpp -g -traceback
+DEBUGFLAGS = -mkl -openmp -g -check all -check noarg_temp_created -traceback -fpp -fpe0
+#FFLAGS = -mkl -O3 -no-prec-div -fpp
+#DEBUGFLAGS = -mkl -g -check all -check noarg_temp_created -traceback -fpp -fpe0
 #add -fpe0 to check for floating point errors (think lowLike also throws these harmlessly)
 MODOUT = -module $(OUTPUT_DIR)
 LAPACKL =
@@ -42,7 +44,7 @@ ifeq ($(STATIC),YES)
 LAPACKL =  -Wl,--start-group $(MKLROOT)/lib/intel64/libmkl_intel_lp64.a $(MKLROOT)/lib/intel64/libmkl_core.a $(MKLROOT)/lib/intel64/libmkl_intel_thread.a -Wl,--end-group -lpthread -lm
 FFLAGS+=  -axAVX,SEE4.2 -static-intel
 else
-FFLAGS += -xHost
+#FFLAGS += -xHost
 endif
 endif
 
