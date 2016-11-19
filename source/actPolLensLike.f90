@@ -250,7 +250,7 @@ module actPolLensLike
          end if
          tElls(l) = l
          !nCl%clkk(l) = Theory%Cls(4,4)%Cl(l)*l*2.*pi/(l+1.)/4.
-         nCl%clkk(l) = b*Theory%Cls(4,4)%Cl(l)*2.*pi/4.
+         nCl%clkk(l) = b*Theory%Cls(4,4)%Cl(l)*2.*pi/4.  
       end do
 
       
@@ -342,8 +342,7 @@ module actPolLensLike
          !write (*,*) "N1 % correction ", perN1
       end if
       
-      binnedMVTheoryClkk = (binnedTheoryClkk + corrN0 + corrN1)/CMB%Alens
-      
+      binnedMVTheoryClkk = (binnedTheoryClkk + corrN0 + corrN1)
       
 
 

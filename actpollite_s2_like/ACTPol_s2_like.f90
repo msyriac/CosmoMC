@@ -4,7 +4,7 @@ module ACTPol_CMBonly
   private
   integer, parameter :: campc = KIND(1.d0)
 
-  character(LEN=*), parameter,public :: data_dir='/users/msyriac/repos/CosmoMC/actpollite_s2_like/data/' !set path to data directory
+  character(LEN=*), parameter,public :: data_dir='/astro/astronfs01/workarea/msyriac/bigGits/CosmoMC/actpollite_s2_like/data/' !set path to data directory
   character(LEN=*), parameter, public :: ap_like='ACTPol_s2_cmbonly_like'
 
   !Possible combinations: TT only, TE only, EE only, TT+TE+EE

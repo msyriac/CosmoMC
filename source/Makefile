@@ -84,7 +84,7 @@ PICO ?= $(shell python -c "import pypico; print pypico.get_folder()" 2> /dev/nul
 cfitsio ?=
 
 #set ACTPOL
-ACTPol ?= /users/msyriac/repos/CosmoMC/actpollite_s2_like
+ACTPol ?= /astro/astronfs01/workarea/msyriac/bigGits/CosmoMC/actpollite_s2_like
 
 #empty not to compile with CLIK, set from ~/.bashrc
 PLANCKLIKE ?=
