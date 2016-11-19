@@ -1,0 +1,3 @@
+[submodule "Sherwin2016ChainSync"]
+	path = Sherwin2016ChainSync
+	url = git@github.com:msyriac/Sherwin2016ChainSync.git
